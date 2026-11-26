@@ -23,6 +23,7 @@ from events import views as event_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', event_views.event_list, name='event_list'),
+    path('events/<int:pk>/', event_views.event_detail, name='event_details'),
 ]
 
 if settings.DEBUG:

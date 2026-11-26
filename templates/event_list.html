@@ -10,7 +10,7 @@
             <p><strong>Дата:</strong> {{ event.date }}</p>
             <p><strong>Место:</strong> {{ event.location }}</p>
             <p>{{ event.short_description }}</p>
-            <a href="/events/{{ event.id }}/">Подробнее</a>
+            <a href="{% url 'event_details' event.id %}">Подробнее</a>
         </div>
     {% empty %}
         <p>К сожалению, пока нет запланированных мероприятий.</p>
