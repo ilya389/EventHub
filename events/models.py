@@ -37,5 +37,8 @@ class Registration(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='new')
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('event', 'email')
+
     def __str__(self):
         return f'{self.name} - {self.event.title}'
