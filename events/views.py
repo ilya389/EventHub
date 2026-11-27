@@ -33,4 +33,4 @@ def event_detail(request, pk):
                 return redirect(f'/events/{event.id}/?success=1')
     else:
         form = RegistrationForm()
-    return render(request, 'event_detail.html', {'event': event, 'form': form})
+    return render(request, 'event_details.html', {'event': event, 'form': form})
