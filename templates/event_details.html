@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ event.title }}</h2>
+    {% if event.image %}
+        <img src="{{ event.image.url }}" alt="{{ event.title }}" style="max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 20px;">
+    {% endif %}
+    <p><strong>Дата:</strong> {{ event.date }}</p>
+    <p><strong>Место:</strong> {{ event.location }}</p>
+    {% if event.capacity %}
+        <p><strong>Вместимость:</strong> {{ event.capacity }} чел.</p>
+    {% endif %}
+    <div style="margin: 20px 0; padding: 15px; background: #f9f9f9; border-left: 4px solid #333;">
+        {{ event.description }}
+    </div>
+    <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+    <h3>Регистрация на мероприятие</h3>
+    {% if request.GET.success %}
+        <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+            Спасибо! Ваша заявка принята. Проверьте письмо (в терминале).
+        </div>
+    {% endif %}
+    <form method="post" style="max-width: 500px;">
+        {% csrf_token %}
+        {% for field in form %}
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">{{ field.label }}:</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: red; font-size: 0.9em; margin-top: 5px;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+            Отправить заявку
+        </button>
+    </form>
+    <p style="margin-top: 30px;">
+        <a href="/events/">&larr; Вернуться к списку мероприятий</a>
+    </p>
+{% endblock %}
